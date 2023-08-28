@@ -120,7 +120,7 @@ const LoginPage: FC<LoginPageProps> = () => {
                 )}
               </Button>
               <Link href="/signup" className="hover:underline font-bold">
-                Oh! you don't account? register here
+                Oh! you don&apos;t account? register here
               </Link>
             </div>
           </form>
