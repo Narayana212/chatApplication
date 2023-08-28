@@ -53,8 +53,7 @@ const LoginPage: FC<LoginPageProps> = () => {
         toast({
           title: "You have Logined Successfully",
         });
-        localStorage.setItem("userInfo", JSON.stringify(values))
-        router.push('/')
+        localStorage.setItem("userInfo", JSON.stringify(values));
 
         
       } else {
@@ -63,7 +62,7 @@ const LoginPage: FC<LoginPageProps> = () => {
           title: data.message,
         });
       }
-     
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -116,7 +115,7 @@ const LoginPage: FC<LoginPageProps> = () => {
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Wait chey
+                    Please Wait
                   </>
                 ) : (
                   "Login"

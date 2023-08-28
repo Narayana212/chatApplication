@@ -56,7 +56,7 @@ const SignUpPage: FC<SignUpPageProps> = () => {
           title: "You have Signed Up",
         });
         localStorage.setItem("userInfo", JSON.stringify(values));
-        console.log(localStorage.getItem("userInfo"));
+  
 
         router.push("/login");
       }
