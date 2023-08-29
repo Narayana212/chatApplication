@@ -5,20 +5,30 @@ import { ScrollArea } from "./ui/scroll-area";
 import { getSender } from "@/helpers/get-sender";
 import { useToast } from "./ui/use-toast";
 import ChatSkeleton from "./chat-skeleton";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Button } from "./ui/button";
+import {Plus } from "lucide-react";
 
 interface MyChatsProps {}
 interface Chat {
-    _id: string;
-    isGroupChat: boolean;
-    users: string[];
-    chatName?: string;
-    latestMessage?: {
-      sender: {
-        name: string;
-      };
-      content: string;
+  _id: string;
+  isGroupChat: boolean;
+  users: string[];
+  chatName?: string;
+  latestMessage?: {
+    sender: {
+      name: string;
     };
-  }
+    content: string;
+  };
+}
 
 const MyChats: FC<MyChatsProps> = () => {
   const [loggedUser, setLoggedUser] = useState();
@@ -51,7 +61,7 @@ const MyChats: FC<MyChatsProps> = () => {
   }
 
   useEffect(() => {
-    console.log("rendering")
+    console.log("rendering");
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo") || ""));
     fetchChats();
   }, [isOpen]);
@@ -64,15 +74,32 @@ const MyChats: FC<MyChatsProps> = () => {
     >
       <div className="pb-3 px-3 text-xl flex w-full justify-between items-center">
         My Chats
+        <Dialog>
+          <DialogTrigger>
+            <Button>
+              <Plus/>New Group
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Just a Random test</DialogTitle>
+              <DialogDescription>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas ipsam iste exercitationem itaque sunt? Excepturi quidem, unde suscipit, quae doloribus adipisci earum soluta placeat, distinctio quo sunt? Eum, commodi?
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="flex flex-col p-3 border w-full h-full rounded-lg overflow-y-hidden">
         {chats ? (
           <ScrollArea>
-            {chats.map((chat:Chat) => (
+            {chats.map((chat: Chat) => (
               <div
                 onClick={() => setSelectedChat(chat)}
                 className={` ${
-                  selectedChat === chat ? "bg-primary text-background" : "bg-card"
+                  selectedChat === chat
+                    ? "bg-primary text-background"
+                    : "bg-card"
                 } cursor-pointer px-3 py-2 mt-2 border rounded-lg `}
                 key={chat._id}
               >
@@ -93,7 +120,7 @@ const MyChats: FC<MyChatsProps> = () => {
             ))}
           </ScrollArea>
         ) : (
-          <ChatSkeleton/>
+          <ChatSkeleton />
         )}
       </div>
     </div>
