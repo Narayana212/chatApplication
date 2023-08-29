@@ -23,7 +23,7 @@ const ARRAY_SKELETON: SkeletonDummy[] = [
 
 const ChatSkeleton: FC<ChatSkeletonProps> = () => {
   return (
-    <div className="h-auto mt-2">
+    <div className="h-full mt-2">
       {ARRAY_SKELETON.map((array: SkeletonDummy) => (
         <Skeleton className="px-3 h-10 py-2 mt-2 border rounded-lg " key={array.id} />
       ))}

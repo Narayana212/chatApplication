@@ -5,16 +5,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { getSender } from "@/helpers/get-sender";
 import { useToast } from "./ui/use-toast";
 import ChatSkeleton from "./chat-skeleton";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
-import { Button } from "./ui/button";
-import {Plus } from "lucide-react";
+import AddToGroup from "./add-to-group";
 
 interface MyChatsProps {}
 interface Chat {
@@ -74,21 +65,7 @@ const MyChats: FC<MyChatsProps> = () => {
     >
       <div className="pb-3 px-3 text-xl flex w-full justify-between items-center">
         My Chats
-        <Dialog>
-          <DialogTrigger>
-            <Button>
-              <Plus/>New Group
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Just a Random test</DialogTitle>
-              <DialogDescription>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas ipsam iste exercitationem itaque sunt? Excepturi quidem, unde suscipit, quae doloribus adipisci earum soluta placeat, distinctio quo sunt? Eum, commodi?
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+        <AddToGroup />
       </div>
       <div className="flex flex-col p-3 border w-full h-full rounded-lg overflow-y-hidden">
         {chats ? (
@@ -106,7 +83,7 @@ const MyChats: FC<MyChatsProps> = () => {
                 <p>
                   {!chat.isGroupChat
                     ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
+                    :chat.chatName}
                 </p>
                 {chat.latestMessage && (
                   <p className="text-xs">
