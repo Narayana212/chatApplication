@@ -100,7 +100,7 @@ const SideBar: FC<SideBarProps> = () => {
     <>
       <Sheet open={isOpen}>
         <SheetTrigger onClick={toggleSheet}>
-          <div className="flex gap-2 items-center px-3">
+          <div className="ml-2 flex gap-2 items-center px-3">
             <Input
               className="cursor-pointer outline-none focus:outline-0"
               placeholder="Search Users to Chat"

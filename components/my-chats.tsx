@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { ScrollArea } from "./ui/scroll-area";
 import { getSender } from "@/helpers/get-sender";
 import { useToast } from "./ui/use-toast";
+import ChatSkeleton from "./chat-skeleton";
 
 interface MyChatsProps {}
 interface Chat {
@@ -92,7 +93,7 @@ const MyChats: FC<MyChatsProps> = () => {
             ))}
           </ScrollArea>
         ) : (
-          "loading"
+          <ChatSkeleton/>
         )}
       </div>
     </div>
