@@ -10,7 +10,7 @@ const ChatProvider = ({ children }) => {
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState();
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isDialogOpen, setIsDialogOpen] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -33,6 +33,7 @@ const ChatProvider = ({ children }) => {
         setChats,
         isOpen,
         setIsOpen,
+        isDialogOpen,setIsDialogOpen
       }}
     >
       {children}

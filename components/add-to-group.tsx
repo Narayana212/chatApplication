@@ -29,7 +29,8 @@ const AddToGroup: FC<AddToGroupProps> = () => {
   const [searchResult, setSearchResult] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
-  const { user, chats, setChats } = ChatState();
+
+  const { user, chats, setChats, isDialogOpen, setIsDialogOpen } = ChatState();
 
   async function handleSearch(query: string) {
     setSearch(query);
@@ -65,19 +66,48 @@ const AddToGroup: FC<AddToGroupProps> = () => {
     setSelectedUsers([...selectedUsers, user]);
   }
 
-  function handleUserRemove(user:User) {
+  function handleUserRemove(user: User) {
     setSelectedUsers((prevUsers) =>
       prevUsers.filter((u) => u._id !== user._id)
     );
   }
 
   async function handleSubmit() {
-    if (!groupChatName || selectedUsers.length === 0) {
+    console.log(selectedUsers);
+    const p = selectedUsers.map((u) => u._id);
+    console.log(p);
+    if (!groupChatName || !selectedUsers) {
       toast({
         title: "Please fill all details",
       });
+      return;
     } else {
-      // Perform the actual chat creation logic here
+      try {
+        console.log(selectedUsers);
+        const response = await fetch("api/chats/group/", {
+          method: "POST",
+          body: JSON.stringify({
+            groupname: groupChatName,
+            users: selectedUsers.map((u) => u._id),
+          }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setChats([data, ...chats]);
+          toast({
+            title: "New Group Chat Created!",
+          });
+        } else {
+          toast({
+            title: data.message,
+          });
+        }
+      } catch (error: any) {
+        toast({
+          title: error.message,
+        });
+      }
+      setIsDialogOpen(false);
     }
   }
 
@@ -106,29 +136,44 @@ const AddToGroup: FC<AddToGroupProps> = () => {
               onChange={(e) => handleSearch(e.target.value)}
             />
             <div className="w-full flex flex-wrap mt-3">
-              {selectedUsers.map((user:User) => ( 
+              {selectedUsers.map((user: User) => (
                 <Badge key={user._id} className="m-1 p-3">
-                  {user.name} <X onClick={() => handleUserRemove(user)} className="h-4 pl-2 cursor-pointer" />
+                  {user.name}{" "}
+                  <X
+                    onClick={() => handleUserRemove(user)}
+                    className="h-4 pl-2 cursor-pointer"
+                  />
                 </Badge>
               ))}
             </div>
             {loading ? (
               <Loader2 className="animate-spin" />
-            ) : (searchResult?.slice(0, 4).map((user:User) => (
+            ) : (
+              searchResult?.slice(0, 4).map((user: User) => (
                 <Badge
                   className="m-1 mt-3 p-4 "
                   key={user._id}
                   variant={"outline"}
                 >
                   {user.name}
-                  <PlusIcon onClick={() => handleGroup(user)} className="h-4 pl-2 cursor-pointer" />
+                  <PlusIcon
+                    onClick={() => handleGroup(user)}
+                    className="h-4 pl-2 cursor-pointer"
+                  />
                 </Badge>
               ))
             )}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button onClick={handleSubmit}>Create the Chat</Button>
+          {loading ? (
+            <Button onClick={handleSubmit}>
+              <Loader2 className="animate-spin" />
+              Please Wait.
+            </Button>
+          ) : (
+            <Button onClick={handleSubmit}>Create the Group</Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

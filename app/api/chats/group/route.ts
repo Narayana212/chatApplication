@@ -9,12 +9,13 @@ connect()
 //create a new group
 export async function POST(request: NextRequest) {
     const requestBody = await request.json();
-    var { users, groupname } = requestBody
+    var { users,groupname } = requestBody
+    console.log(users,groupname)
 
     if (!users || !groupname) {
         return NextResponse.json({ message: "Please Fill all the fields" })
     }
-    users = JSON.parse(users)
+    
     if (users.length < 2) {
         return NextResponse.json({ message: "More than 2 users are required to form a group chat" }, { status: 400 })
     }
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
     const { email } = decodedToken as JwtPayload
     const existingUser = await User.findOne({ email })
     users.push(existingUser)
+    
 
     try {
         const groupChat = await Chat.create({

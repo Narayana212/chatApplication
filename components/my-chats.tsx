@@ -31,6 +31,7 @@ const MyChats: FC<MyChatsProps> = () => {
     setChats,
     isOpen,
     setIsOpen,
+    isDialogOpen,setIsDialogOpen
   } = ChatState();
   const { toast } = useToast();
   async function fetchChats() {
@@ -52,10 +53,11 @@ const MyChats: FC<MyChatsProps> = () => {
   }
 
   useEffect(() => {
+    console.log(isDialogOpen)
     console.log("rendering");
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo") || ""));
     fetchChats();
-  }, [isOpen]);
+  }, [isOpen,isDialogOpen]);
 
   return (
     <div
