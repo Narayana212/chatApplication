@@ -15,13 +15,18 @@ import { useToast } from "./ui/use-toast";
 import { ChatState } from "@/context/chat-provider";
 import { Badge } from "./ui/badge";
 
+interface User {
+  _id: string;
+  name: string;
+}
+
 interface AddToGroupProps {}
 
 const AddToGroup: FC<AddToGroupProps> = () => {
   const [groupChatName, setGroupChatName] = useState<string>("");
-  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
   const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<string[]>([]);
+  const [searchResult, setSearchResult] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
   const { user, chats, setChats } = ChatState();
@@ -50,7 +55,7 @@ const AddToGroup: FC<AddToGroupProps> = () => {
     setLoading(false);
   }
 
-  function handleGroup(user) {
+  function handleGroup(user: User) {
     if (selectedUsers.includes(user)) {
       toast({
         title: "User Already added",
@@ -60,7 +65,7 @@ const AddToGroup: FC<AddToGroupProps> = () => {
     setSelectedUsers([...selectedUsers, user]);
   }
 
-  function handleUserRemove(user: any) {
+  function handleUserRemove(user:User) {
     setSelectedUsers((prevUsers) =>
       prevUsers.filter((u) => u._id !== user._id)
     );
@@ -101,7 +106,7 @@ const AddToGroup: FC<AddToGroupProps> = () => {
               onChange={(e) => handleSearch(e.target.value)}
             />
             <div className="w-full flex flex-wrap mt-3">
-              {selectedUsers.map((user) => ( 
+              {selectedUsers.map((user:User) => ( 
                 <Badge key={user._id} className="m-1 p-3">
                   {user.name} <X onClick={() => handleUserRemove(user)} className="h-4 pl-2 cursor-pointer" />
                 </Badge>
@@ -109,7 +114,7 @@ const AddToGroup: FC<AddToGroupProps> = () => {
             </div>
             {loading ? (
               <Loader2 className="animate-spin" />
-            ) : (searchResult?.slice(0, 4).map((user) => (
+            ) : (searchResult?.slice(0, 4).map((user:User) => (
                 <Badge
                   className="m-1 mt-3 p-4 "
                   key={user._id}
