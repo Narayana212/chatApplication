@@ -5,5 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request:NextRequest){
     const decodedToken = getDataFromToken(request)
     const { id } = decodedToken as JwtPayload;
+    
     return NextResponse.json({id},{status:200})
 }
