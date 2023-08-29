@@ -153,7 +153,7 @@ const SideBar: FC<SideBarProps> = () => {
                     <CardHeader>
                       <Avatar>
                         <AvatarImage src={user.pic} />
-                        <AvatarFallback>RLN</AvatarFallback>
+                        <AvatarFallback>{user.name[0]}</AvatarFallback>
                       </Avatar>
                     </CardHeader>
                     <CardContent className="w-full">

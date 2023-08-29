@@ -59,7 +59,7 @@ const MyChats: FC<MyChatsProps> = () => {
     <div
       className={`${
         selectedChat ? "none" : "flex"
-      } md:flex bg-card text-card-foreground  flex-col items-center p-3 w-full md:w-2/6 rounded `}
+      } md:flex border  flex-col items-center p-3 w-full md:w-2/6 rounded `}
     >
       <div className="pb-3 px-3 text-xl flex w-full justify-between items-center">
         My Chats
@@ -71,8 +71,8 @@ const MyChats: FC<MyChatsProps> = () => {
               <div
                 onClick={() => setSelectedChat(chat)}
                 className={` ${
-                  selectedChat === chat ? " bg-background" : "bg-card"
-                } cursor-pointer px-3 py-2 mt-2 border rounded-lg`}
+                  selectedChat === chat ? "bg-primary text-background" : "bg-card"
+                } cursor-pointer px-3 py-2 mt-2 border rounded-lg `}
                 key={chat._id}
               >
                 <p>

@@ -55,14 +55,15 @@ const LoginPage: FC<LoginPageProps> = () => {
         });
         localStorage.setItem("userInfo", JSON.stringify(values));
 
-        
+        router.push("/");
+        window.location.href="/"
       } else {
         const data = await response.json();
         toast({
           title: data.message,
         });
       }
-      router.push("/");
+      
     } catch (error) {
       console.log(error);
     }
