@@ -22,7 +22,7 @@ interface Chat {
 }
 
 const MyChats: FC<MyChatsProps> = () => {
-  const [loggedUser, setLoggedUser] = useState();
+  const [loggedUser, setLoggedUser] = useState<any[]>();
   const {
     selectedChat,
     setSelectedChat,
@@ -31,8 +31,20 @@ const MyChats: FC<MyChatsProps> = () => {
     setChats,
     isOpen,
     setIsOpen,
-    isDialogOpen,setIsDialogOpen
+    isDialogOpen,
+    setIsDialogOpen,
   } = ChatState();
+  async function getId() {
+    const response = await fetch("api/users/id");
+    if (response.ok) {
+      const data = await response.json();
+      const { id } = data;
+
+      const local = JSON.parse(localStorage.getItem("userInfo") || "[]");
+      local.id = id;
+      setLoggedUser(local);
+    }
+  }
   const { toast } = useToast();
   async function fetchChats() {
     try {
@@ -53,11 +65,12 @@ const MyChats: FC<MyChatsProps> = () => {
   }
 
   useEffect(() => {
-    console.log(isDialogOpen)
+    console.log(isDialogOpen);
     console.log("rendering");
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo") || ""));
+    getId();
+
     fetchChats();
-  }, [isOpen,isDialogOpen]);
+  }, [isOpen, isDialogOpen]);
 
   return (
     <div
@@ -85,7 +98,7 @@ const MyChats: FC<MyChatsProps> = () => {
                 <p>
                   {!chat.isGroupChat
                     ? getSender(loggedUser, chat.users)
-                    :chat.chatName}
+                    : chat.chatName}
                 </p>
                 {chat.latestMessage && (
                   <p className="text-xs">
