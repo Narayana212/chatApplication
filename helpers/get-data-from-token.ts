@@ -7,6 +7,6 @@ export const getDataFromToken=(request:NextRequest)=>{
         const decodedToken=jwt.verify(jwtToken,"that_is_secret")
         return decodedToken
     }catch(error:any){
-        throw new Error(error.message)
+        console.log(error.message)
     }
 }
