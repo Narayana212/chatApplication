@@ -1,5 +1,4 @@
 import { ChatState } from "@/context/chat-provider";
-import { Heading1 } from "lucide-react";
 import { FC } from "react";
 import SingleChat from "./single-chat";
 

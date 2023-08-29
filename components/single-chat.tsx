@@ -4,7 +4,7 @@ import { useToast } from "./ui/use-toast";
 import { ChatState } from "@/context/chat-provider";
 import { getSender } from "@/helpers/get-sender";
 import ScrollableChat from "./scrollable-chat";
-import Lottie from "react-lottie";
+
 import animationData from "./animations/typing.json";
 import io from "socket.io-client";
 import { Input } from "./ui/input";
@@ -121,11 +121,7 @@ const SingleChat: FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) => {
 
             {istyping ? (
               <div>
-                <Lottie
-                  options={defaultOptions}
-                  width={70}
-                  style={{ marginBottom: 15, marginLeft: 0 }}
-                />
+                typing
               </div>
             ) : (
               <></>
