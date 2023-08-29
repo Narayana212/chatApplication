@@ -7,14 +7,14 @@ import React, { useContext, useEffect, useState } from "react";
 
 export default function Home() {
   const {user}=ChatState()
-  console.log(user)
+  const [fetchAgain, setFetchAgain] = useState(false)
   
   return (
     <div className="pt-4 w-screen ">
       {<SideBar />}
       <div className="flex justify-between w-screen h-screen p-5">
         {<MyChats />}
-        {<ChatBox />}
+        {<ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}   />}
       </div>
     </div>
   );

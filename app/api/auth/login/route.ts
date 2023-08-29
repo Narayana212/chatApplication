@@ -26,14 +26,16 @@ export async function POST(request: NextRequest) {
             response.cookies.set("token", jwtToken, {
                 httpOnly: true,
             });
+            
             return response;
+            
         } else {
             return NextResponse.json({ message: "Your Password is wrong" }, { status: 400 });
         }
     } catch (error) {
         console.log(error);
         return NextResponse.json(
-            { message: "Something went wrong" },
+            { message: "SomeThing went wrong" },
             { status: 500 }
         );
     }

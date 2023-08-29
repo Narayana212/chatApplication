@@ -1,14 +1,24 @@
+import { ChatState } from "@/context/chat-provider";
 import { Heading1 } from "lucide-react";
 import { FC } from "react";
+import SingleChat from "./single-chat";
 
 interface ChatBoxProps {
-    
+    fetchAgain: boolean;
+  setFetchAgain: React.Dispatch<React.SetStateAction<boolean>>;
 }
- 
-const ChatBox: FC<ChatBoxProps> = () => {
-    return (
-        <h1 className="hidden md:flex">ChatBox</h1>
-    );
-}
- 
+
+const ChatBox: FC<ChatBoxProps> = ({fetchAgain,setFetchAgain}) => {
+  const { selectedChat } = ChatState();
+  return (
+    <div
+      className={`${
+        selectedChat ? "flex" : "none"
+      } md:flex items-center flex-col ml-2 p-12 border h- w-full md:w-4/6 `}
+    >
+      <SingleChat  fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+    </div>
+  );
+};
+
 export default ChatBox;

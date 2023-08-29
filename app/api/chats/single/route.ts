@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
     const { userId } = requestBody
     const decodedToken = getDataFromToken(request)
     const { id } = decodedToken as JwtPayload;
+    
     if (!id) {
         return NextResponse.json({ message: "Invalid to send " }, { status: 400 })
 
