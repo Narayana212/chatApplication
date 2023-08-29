@@ -78,7 +78,7 @@ const MyChats: FC<MyChatsProps> = () => {
                 className={` ${
                   selectedChat === chat
                     ? "bg-primary text-background"
-                    : "bg-card"
+                    : "bg-card text-background"
                 } cursor-pointer px-3 py-2 mt-2 border rounded-lg `}
                 key={chat._id}
               >
