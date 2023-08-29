@@ -12,7 +12,7 @@ const ChatBox: FC<ChatBoxProps> = ({fetchAgain,setFetchAgain}) => {
   return (
     <div
       className={`${
-        selectedChat ? "flex" : "none"
+        selectedChat ? "none" : "none"
       } md:flex items-center flex-col ml-2 p-12 border h- w-full md:w-4/6 `}
     >
       <SingleChat  fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
