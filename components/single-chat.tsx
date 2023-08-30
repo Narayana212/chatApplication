@@ -112,11 +112,11 @@ const SingleChat: FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) => {
                 <h1 className="font-bold text-2xl"> {selectedChat.chatName.toUpperCase()} group</h1>
               ))}
           </h1>
-          <div className="flex pb-5 flex-col justify-end w-full h-full ">
+          <div className="flex pb-2 lg:pb-5 flex-col justify-end w-full h-full ">
             {loading ? (
               <Loader2 className="m-auto animate-spin w-20 h-20 self-center" />
             ) : (
-              <div className="flex flex-col px-5  overflow-y-scroll">
+              <div className="flex flex-col px-2 lg:px-5  overflow-y-scroll">
                 <ScrollableChat messages={messages} />
               </div>
             )}

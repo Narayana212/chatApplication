@@ -17,34 +17,34 @@ interface Message {
     _id: number;
     pic: string;
     name: string;
-    email:string;
+    email: string;
   };
   content: string;
 }
 
 const ScrollableChat: FC<ScrollableChatProps> = ({ messages }) => {
   const { user } = ChatState();
-  const [id,setId]=useState(0)
-  async function getId(){
-    const response=await fetch("api/users/id")
-    if(response.ok){
-      const data=await response.json()
-      const {id}=data
-      setId(id)
-    }
+  const [id, setId] = useState(0);
 
+  async function getId() {
+    const response = await fetch("api/users/id");
+    if (response.ok) {
+      const data = await response.json();
+      const { id } = data;
+      setId(id);
+    }
   }
-  useEffect(()=>{
-    getId()
-  })
-  
-  
+
+  useEffect(() => {
+    getId();
+  }, []);
+
   return (
-    <ScrollArea className="h-full pr-5">
+    <ScrollArea className="h-full pr-5 ">
       {messages &&
         messages.map((m, i: number) => (
           <div className="flex" key={m._id}>
-            <span
+            <div
               className={`${
                 m.sender._id === id
                   ? "bg-primary text-background"
@@ -55,10 +55,11 @@ const ScrollableChat: FC<ScrollableChatProps> = ({ messages }) => {
                 m,
                 i,
                 id
-              )}  rounded px-7 py-2 max-w-7/12`}
+              )} rounded px-5 text-sm md:text-base md:px-7 py-2  max-w-sm overflow-hidden`}
+              style={{ textOverflow: "ellipsis" }}
             >
-              {m.content}
-            </span>
+              <p className="whitespace-pre-line">{m.content}</p>
+            </div>
           </div>
         ))}
     </ScrollArea>
