@@ -9,10 +9,11 @@ interface ChatBoxProps {
 
 const ChatBox: FC<ChatBoxProps> = ({fetchAgain,setFetchAgain}) => {
   const { selectedChat } = ChatState();
+  console.log(selectedChat)
   return (
     <div
       className={`${
-        selectedChat ? "none" : "none"
+        selectedChat ? "flex" : "none"
       } md:flex items-center flex-col ml-2 p-12 border h- w-full md:w-4/6 `}
     >
       <SingleChat  fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
