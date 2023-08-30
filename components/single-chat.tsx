@@ -116,7 +116,7 @@ const SingleChat: FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) => {
             {loading ? (
               <Loader2 className="m-auto animate-spin w-20 h-20 self-center" />
             ) : (
-              <div className="flex flex-col px-2 lg:px-5  overflow-y-scroll">
+              <div className="flex flex-col  lg:px-5  overflow-y-scroll">
                 <ScrollableChat messages={messages} />
               </div>
             )}
