@@ -75,7 +75,7 @@ const MyChats: FC<MyChatsProps> = () => {
   return (
     <div
       className={`${
-        selectedChat ? "none" : "flex"
+        selectedChat ? "hidden" : "flex"
       } md:flex border  flex-col items-center p-3 w-full md:w-2/6 rounded `}
     >
       <div className="pb-3 px-3 text-xl flex w-full justify-between items-center">
@@ -84,7 +84,7 @@ const MyChats: FC<MyChatsProps> = () => {
       </div>
       <div className="flex flex-col p-3 border w-full h-full rounded-lg overflow-y-hidden">
         {chats ? (
-          <ScrollArea>
+          <ScrollArea className="px-5 py-3">
             {chats.map((chat: Chat) => (
               <div
                 onClick={() => setSelectedChat(chat)}

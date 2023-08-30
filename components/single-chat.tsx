@@ -99,22 +99,24 @@ const SingleChat: FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) => {
       {selectedChat ? (
         <>
           <h1 className="pb-3 px-2 text-lg w-full flex justify-between items-center">
+            <Button onClick={() => setSelectedChat("")} variant={"link"}>
             <MoveLeft
               className="flex md:none cursor-pointer"
-              onClick={() => setSelectedChat("")}
+              
             />
+            </Button>
             {messages &&
               (!selectedChat.isGroupChat ? (
-                <>{getSender(user, selectedChat.users)}</>
+                <h1 className="font-bold text-2xl">{getSender(user, selectedChat.users)}</h1>
               ) : (
-                <>{selectedChat.chatName.toUpperCase()}</>
+                <h1 className="font-bold text-2xl"> {selectedChat.chatName.toUpperCase()} group</h1>
               ))}
           </h1>
-          <div className="flex flex-col justify-end w-full h-full ">
+          <div className="flex pb-5 flex-col justify-end w-full h-full ">
             {loading ? (
               <Loader2 className="m-auto animate-spin w-20 h-20 self-center" />
             ) : (
-              <div className="flex flex-col  overflow-y-scroll">
+              <div className="flex flex-col px-5  overflow-y-scroll">
                 <ScrollableChat messages={messages} />
               </div>
             )}

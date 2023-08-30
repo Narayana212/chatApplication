@@ -40,7 +40,7 @@ const ScrollableChat: FC<ScrollableChatProps> = ({ messages }) => {
   
   
   return (
-    <ScrollArea className="h-full">
+    <ScrollArea className="h-full pr-5">
       {messages &&
         messages.map((m, i: number) => (
           <div className="flex" key={m._id}>
@@ -48,7 +48,7 @@ const ScrollableChat: FC<ScrollableChatProps> = ({ messages }) => {
               className={`${
                 m.sender._id === id
                   ? "bg-primary text-background"
-                  : "bg-card"
+                  : "bg-card border"
               } ${isSameSender(messages, m, i, id) ? "mt-10" : "mt-3"}
               ml-${isSameSenderMargin(
                 messages,
