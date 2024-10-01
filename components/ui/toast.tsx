@@ -10,6 +10,13 @@ const ToastProvider = ToastPrimitives.Provider
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Viewport>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>
+/**
+ * Renders a viewport for toast notifications using Radix UI Primitives.
+ * @param {object} props - The component props.
+ * @param {string} [props.className] - Additional CSS classes to apply to the viewport.
+ * @param {React.Ref} ref - A ref to be forwarded to the underlying DOM element.
+ * @returns {JSX.Element} A toast viewport component with customizable positioning and styling.
+ */
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Viewport
     ref={ref}
@@ -35,12 +42,27 @@ const toastVariants = cva(
     defaultVariants: {
       variant: "default",
     },
+  /**
+   * A customizable Toast component that renders a notification message.
+   * @param {Object} props - The properties passed to the component.
+   * @param {string} props.className - Additional CSS class names to apply to the component.
+   * @param {string} props.variant - The visual style variant of the toast.
+   * @param {React.Ref} ref - A ref object to access the underlying DOM element.
+   * @returns {React.ReactElement} A styled Toast component.
+   */
   }
 )
 
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
+    /**
+     * Renders a customizable action button for a Toast component.
+     * @param {Object} props - The component props.
+     * @param {string} [props.className] - Additional CSS classes to apply to the button.
+     * @param {React.Ref} ref - The ref to be forwarded to the underlying button element.
+     * @returns {React.Element} A styled button element with forwarded props and ref.
+     */
     VariantProps<typeof toastVariants>
 >(({ className, variant, ...props }, ref) => {
   return (
@@ -71,6 +93,13 @@ ToastAction.displayName = ToastPrimitives.Action.displayName
 const ToastClose = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Close>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>
+/**
+ * Renders a customizable close button for a toast notification.
+ * @param {Object} props - The component props.
+ * @param {string} [props.className] - Additional CSS class names to apply to the close button.
+ * @param {React.Ref} ref - A ref object to attach to the close button element.
+ * @returns {React.Element} A React element representing the close button for a toast.
+ */
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Close
     ref={ref}
@@ -89,11 +118,25 @@ ToastClose.displayName = ToastPrimitives.Close.displayName
 const ToastTitle = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Title>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>
+/**
+ * Renders a customized Toast Title component
+ * @param {Object} props - The component props
+ * @param {string} [props.className] - Additional CSS class names for styling
+ * @param {React.Ref} ref - Ref object for the component
+ * @returns {React.ReactElement} A styled Toast Title component
+ */
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
     className={cn("text-sm font-semibold", className)}
     {...props}
+  /**
+   * A React component that renders a description for a Toast notification.
+   * @param {Object} props - The props object.
+   * @param {string} [props.className] - Additional CSS class names to apply to the component.
+   * @param {React.Ref} ref - A ref to be forwarded to the underlying ToastPrimitives.Description component.
+   * @returns {React.ReactElement} A ToastPrimitives.Description component with applied styles and props.
+   */
   />
 ))
 ToastTitle.displayName = ToastPrimitives.Title.displayName

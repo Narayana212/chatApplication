@@ -8,6 +8,14 @@ import { cn } from "@/lib/utils"
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+/**
+ * Creates a customizable scroll area component with a scrollbar
+ * @param {Object} props - The component props
+ * @param {string} props.className - Additional CSS classes to apply to the root element
+ * @param {React.ReactNode} props.children - The content to be rendered inside the scroll area
+ * @param {React.Ref} ref - Ref object for the root element
+ * @returns {React.ReactElement} A ScrollArea component with a custom scrollbar
+ */
 >(({ className, children, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}
@@ -18,6 +26,14 @@ const ScrollArea = React.forwardRef<
       {children}
     </ScrollAreaPrimitive.Viewport>
     <ScrollBar />
+    /**
+     * Renders a customizable scroll bar component
+     * @param {Object} props - The component props
+     * @param {string} props.className - Additional CSS classes for styling
+     * @param {string} [props.orientation="vertical"] - The orientation of the scroll bar ("vertical" or "horizontal")
+     * @param {React.Ref} ref - Ref object for the scroll bar element
+     * @returns {React.Element} A ScrollAreaScrollbar component with a ScrollAreaThumb inside
+     */
     <ScrollAreaPrimitive.Corner />
   </ScrollAreaPrimitive.Root>
 ))
